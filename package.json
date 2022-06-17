@@ -1,6 +1,6 @@
 {
   "name": "@zolyn/cz-conventional-changelog",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Commitizen adapter following the conventional-changelog format.",
   "main": "index.js",
   "publishConfig": {
@@ -12,10 +12,10 @@
     "format": "prettier --write *.js",
     "semantic-release": "semantic-release"
   },
-  "homepage": "https://github.com/commitizen/cz-conventional-changelog",
+  "homepage": "https://github.com/Zolyn/cz-conventional-changelog",
   "repository": {
     "type": "git",
-    "url": "https://github.com/commitizen/cz-conventional-changelog.git"
+    "url": "https://github.com/Zolyn/cz-conventional-changelog.git"
   },
   "engineStrict": true,
   "engines": {
