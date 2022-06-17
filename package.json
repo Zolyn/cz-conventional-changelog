@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Commitizen adapter following the conventional-changelog format.",
   "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "commit": "git-cz",
     "test": "mocha *.test.js",
@@ -18,7 +21,16 @@
   "engines": {
     "node": ">= 10"
   },
-  "author": "Jim Cummins <jimthedev@gmail.com>",
+  "contributors": [
+    {
+        "name": "Jim Cummins",
+        "email": "jimthedev@gmail.com"
+    },
+    {
+        "name": "Yumeoto Zorin",
+        "email": "zorin1477@gmail.com"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
