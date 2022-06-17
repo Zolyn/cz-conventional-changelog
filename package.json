@@ -1,6 +1,6 @@
 {
-  "name": "cz-conventional-changelog",
-  "version": "0.0.0-semantically-released.0",
+  "name": "@zolyn/cz-conventional-changelog",
+  "version": "1.0.0",
   "description": "Commitizen adapter following the conventional-changelog format.",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "chalk": "^2.4.1",
     "commitizen": "^4.0.3",
     "conventional-commit-types": "^3.0.0",
+    "inquirer-search-list": "^1.2.6",
     "lodash.map": "^4.5.1",
     "longest": "^2.0.1",
     "word-wrap": "^1.0.3"
