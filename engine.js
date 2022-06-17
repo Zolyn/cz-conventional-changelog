@@ -4,6 +4,7 @@ var wrap = require('word-wrap');
 var map = require('lodash.map');
 var longest = require('longest');
 var chalk = require('chalk');
+var searchList = require('inquirer-search-list');
 
 var filter = function(array) {
   return array.filter(function(x) {
@@ -67,9 +68,11 @@ module.exports = function(options) {
       // See inquirer.js docs for specifics.
       // You can also opt to use another input
       // collection library if you prefer.
+      cz.registerPrompt('search-list', searchList);
+
       cz.prompt([
         {
-          type: 'list',
+          type: 'search-list',
           name: 'type',
           message: "Select the type of change that you're committing:",
           choices: choices,
@@ -137,29 +140,12 @@ module.exports = function(options) {
         },
         {
           type: 'input',
-          name: 'breakingBody',
-          default: '-',
-          message:
-            'A BREAKING CHANGE commit requires a body. Please enter a longer description of the commit itself:\n',
-          when: function(answers) {
-            return answers.isBreaking && !answers.body;
-          },
-          validate: function(breakingBody, answers) {
-            return (
-              breakingBody.trim().length > 0 ||
-              'Body is required for BREAKING CHANGE'
-            );
-          }
-        },
-        {
-          type: 'input',
           name: 'breaking',
-          message: 'Describe the breaking changes:\n',
+          message: 'Describe the breaking changes: (press enter to skip)\n',
           when: function(answers) {
             return answers.isBreaking;
           }
         },
-
         {
           type: 'confirm',
           name: 'isIssueAffected',
@@ -168,24 +154,14 @@ module.exports = function(options) {
         },
         {
           type: 'input',
-          name: 'issuesBody',
-          default: '-',
-          message:
-            'If issues are closed, the commit requires a body. Please enter a longer description of the commit itself:\n',
-          when: function(answers) {
-            return (
-              answers.isIssueAffected && !answers.body && !answers.breakingBody
-            );
-          }
-        },
-        {
-          type: 'input',
           name: 'issues',
           message: 'Add issue references (e.g. "fix #123", "re #123".):\n',
           when: function(answers) {
             return answers.isIssueAffected;
           },
-          default: options.defaultIssues ? options.defaultIssues : undefined
+          validate: function (issues) {
+            return issues.trim().length > 0 || 'Issues references are required.'
+          }
         }
       ]).then(function(answers) {
         var wrapOptions = {
@@ -199,8 +175,10 @@ module.exports = function(options) {
         // parentheses are only needed when a scope is present
         var scope = answers.scope ? '(' + answers.scope + ')' : '';
 
+        var breakingMark = answers.isBreaking ? '!' : '';
+
         // Hard limit this line in the validate
-        var head = answers.type + scope + ': ' + answers.subject;
+        var head = answers.type + scope + breakingMark + ': ' + answers.subject;
 
         // Wrap these lines at options.maxLineWidth characters
         var body = answers.body ? wrap(answers.body, wrapOptions) : false;
