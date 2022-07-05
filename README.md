@@ -9,6 +9,10 @@ Status:
 
 Part of the [commitizen](https://github.com/commitizen/cz-cli) family. Prompts for [conventional changelog](https://github.com/conventional-changelog/conventional-changelog) standard.
 
+## Features of this fork
+- Add search functionality for list (Powered by [inquirer-search-list](https://github.com/robin-rpr/inquirer-search-list))
+- Support using exclamation mark for breaking changes.
+
 ## Configuration
 
 ### package.json
